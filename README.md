@@ -14,7 +14,7 @@ If you run this with docker option **--rm** (as bellow), keep in mind that docke
 # Multi-Arch
 This image supports the following architectures: linux/armv7, linux/arm64, linux/386 and linux/amd64.
 
-This means you get it running on your RaspberryPi.
+This means you can get it running on your RaspberryPi!
 
 ---
 # Usage
@@ -23,7 +23,7 @@ This means you get it running on your RaspberryPi.
 ```
 Then access http://localhost:7681 to have a web-based shell. There is no enforced limit on the number of shells, but you can do that if needed, by customizing the ttyd daemon process.
 
-See [here](https://github.com/tsl0922/ttyd#command-line-options) and [here](https://github.com/tsl0922/ttyd/wiki/Client-Options) for more help and the **CMD** line of this image's Dockerfile.
+See [here](https://github.com/tsl0922/ttyd#command-line-options) and [here](https://github.com/tsl0922/ttyd/wiki/Client-Options) for more help and the **CMD** line of this image's [Dockerfile](https://github.com/raonigabriel/web-terminal/blob/master/amd64/Dockerfile#L26).
 
 ---
 # Advanced Usage
@@ -99,7 +99,7 @@ If you want to use any volume(s) from the host, just bind mount it with **-v**, 
 
 ---
 ## Custom (derived) image
-You can create your own custom Docker image, inherit from this one then add the tools you want and a non-root user (recomended). See the sample **Dockerfile** bellow for a custom developer image tha could be used as standard-sandboxed-environment by javascript developers:
+You can create your own custom Docker image, inherit from this one then add the tools you want and a non-root user (recomended). See the sample **Dockerfile** bellow for a custom developer image that could be used as standard-sandboxed-environment by javascript developers:
 ```docker
 FROM raonigabriel/web-terminal:latest
 RUN apk add --no-cache curl nano git g++ make npm docker-cli && \
