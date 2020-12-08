@@ -2,13 +2,19 @@
 
 ## What is this?
 This is a lightweight (~43MB) alpine based docker image that comes pre-packaged with 2 wonderful tools:
-* [ttyd](https://github.com/tsl0922/ttyd): is a simple command-line tool for sharing terminal over the web, using websockets.
+* [ttyd](https://github.com/tsl0922/ttyd): is a simple command-line tool for sharing a terminal over the web, using WebSockets.
 * [ngrok](https://ngrok.com/): Creates reverse tunnels that allow access to your box from the internet.
 
-On top of those, I've added socat, nginx, openssh and openssl. 
-This allows you to quickly provision an isolated (docker container) that can serve as a base for a lot of tunelling solutions. Use your imagination. :wink:
+On top of those, I've added socat, Nginx, OpenSSH, and OpenSSL. 
+This allows you to quickly provision an isolated (docker container) that can serve as a base for a lot of tunneling solutions. Use your imagination. :wink:
 
 If you run this with docker option **--rm** (as bellow), keep in mind that docker will remove the container once it gets stopped. This is good if you don't want to leave any garbage behind.
+
+---
+# Multi-Arch
+This image supports the following architectures: linux/armv7, linux/arm64, linux/386 and linux/amd64.
+
+This means you get it running on your RaspberryPi.
 
 ---
 # Usage
@@ -28,12 +34,11 @@ ngrok http -region=sa -bind-tls=true -inspect=false localhost:7681
 ```
 Check its running:
 ```
-ngrok by @inconshreveable                                                                                                                                                                                                                                     (Ctrl+C to quit)
-                                                                                                                                                                                                                                                                              
-Session Status                online                                                                                                                                                                                                                                          
-Session Expires               7 hours, 59 minutes                                                                                                                                                                                                                             
-Version                       2.3.35                                                                                                                                                                                                                                          
-Region                        South America (sa)                                                                                                                                                                                                            
+ngrok by @inconshreveable
+Session Status                online
+Session Expires               7 hours, 59 minutes
+Version                       2.3.35
+Region                        South America (sa)
 Forwarding                    https://e0075a2a0966.ngrok.io -> http://localhost:7681
 ```
 
@@ -46,17 +51,17 @@ Now, let's try that with nginx. First, run the embedded nginx in the background 
 # nginx &
 # ngrok http 80
 
-ngrok by @inconshreveable                                                                                                                                                                                                                                     (Ctrl+C to quit)
-                                                                                                                                                                                                                                                                              
-Session Status                online                                                                                                                                                                                                                                          
-Session Expires               7 hours, 59 minutes                                                                                                                                                                                                                             
-Version                       2.3.35                                                                                                                                                                                                                                          
-Region                        United States (us)                                                                                                                                                                                                                              
-Web Interface                 http://127.0.0.1:4040                                                                                                                                                                                                                           
-Forwarding                    http://cf96bd9d722e.ngrok.io -> http://localhost:80                                                                                                                                                                                             
+ngrok by @inconshreveable
+Session Status                online
+Session Expires               7 hours, 59 minutes
+Version                       2.3.35
+Region                        United States (us)
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    http://cf96bd9d722e.ngrok.io -> http://localhost:80
 Forwarding                    https://cf96bd9d722e.ngrok.io -> http://localhost:80 
 ```
-And now you have your nginx exposed to the internet over HTTP and HTPS. On this example, the web interface is also enabled on port 4040.
+And now you have your nginx exposed to the internet over HTTP and HTPS (there are 2 **Forwarding** mappings).
+On this example, the web interface is also enabled on port 4040.
 
 Keep in mind that you can also use any other TCP based service server because ngrok supports not only HTTP/HTTPS but also raw TCP tunnels.
 
@@ -118,7 +123,7 @@ Build, then run it:
 # docker build . -t js-box
 # docker run --rm --hostname jsbox -d -p 7681:7681 js-box
 ```
-Because we configured the **~/.ngrok2/ngrok.yml** on this custom image, you can start the ngrok tunnel by name inside the container as following:
+Because we configured the **~/.ngrok2/ngrok.yml** on this custom image, you can start the ngrok tunnel by name inside the container as follows:
  ```sh
 # ngrok start nodejs
 ```
@@ -131,7 +136,7 @@ We could also use have used socat, openssh tunnels or event ngrok to forward the
 
 ---
 ## ngrok account and plans
-ngrok suports TLS, TCP tunnels, certs, built-in fileserver, forwarding to another machines so please take a look on https://ngrok.com/docs for more help.
+ngrok suports TLS, TCP tunnels, certs, built-in fileserver, forwarding to other machines so please take a look on https://ngrok.com/docs for more help.
 
 Keep in mind that some of the advanced features require you to create a (free) account then use the provided auth token. See https://ngrok.com/docs#getting-started-authtoken for more info.
 
