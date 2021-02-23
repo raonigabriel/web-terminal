@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.13.2
 
 # Whenever possible, install tools using the distro package manager
 RUN apk add --no-cache tini ttyd socat nginx unzip openssl openssh ca-certificates  && \
