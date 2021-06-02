@@ -1,6 +1,6 @@
 #!/bin/bash
 # Build semantic-version
-VERSION=1.0.1
+VERSION=1.0.2
 docker buildx build --no-cache --platform linux/arm/v7 -t raonigabriel/web-terminal:armv7-${VERSION} ./armv7
 docker buildx build --no-cache --platform linux/arm64 -t raonigabriel/web-terminal:arm64-${VERSION} ./arm64
 docker buildx build --no-cache --platform linux/386 -t raonigabriel/web-terminal:386-${VERSION} ./386
